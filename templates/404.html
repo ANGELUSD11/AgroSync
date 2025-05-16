@@ -1,0 +1,46 @@
+<!-- templates/404.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página no encontrada</title>
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .error-container {
+            text-align: center;
+            background-color: #456c3b;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .error-container h1 {
+            font-size: 80px;
+            margin: 0;
+        }
+        .error-container p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .error-container a {
+            color: #d8f09b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>404</h1>
+    <p>¡Ups! La página que buscas no existe.</p>
+    <p><a href="{% url 'home' %}">Volver al inicio</a></p>
+</div>
+</body>
+</html>

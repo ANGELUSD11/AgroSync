@@ -1,8 +1,70 @@
-<!-- templates/users/register.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/styles.css' %}">
+</head>
+<body>
+<div class="form-container">
+    <h2>Registro de Usuario</h2>
+    <form method="post">
+        {% csrf_token %}
 
-<h2>Registro de Usuario</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Registrarse</button>
-</form>
+        <!-- Fila 1: Name y Last Name -->
+        <div class="form-row two-cols">
+            <div class="form-group">
+                <label for="id_first_name">Name</label>
+                {{ form.first_name }}
+            </div>
+            <div class="form-group">
+                <label for="id_last_name">Last Name</label>
+                {{ form.last_name }}
+            </div>
+        </div>
+
+        <!-- Fila 2: Country, State y City -->
+        <div class="form-row three-cols">
+            <div class="form-group">
+                <label for="id_country">Country</label>
+                {{ form.country }}
+            </div>
+            <div class="form-group">
+                <label for="id_state">State</label>
+                {{ form.state }}
+            </div>
+            <div class="form-group">
+                <label for="id_city">City</label>
+                {{ form.city }}
+            </div>
+        </div>
+
+        <!-- Fila 3: Email -->
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label for="id_email">Email</label>
+                {{ form.email }}
+            </div>
+        </div>
+
+        <!-- Fila 4: Password y Confirmación -->
+        <div class="form-row two-cols">
+            <div class="form-group">
+            <label for="id_password1">Password</label>
+            {{ form.password1 }}
+            </div>
+            <div class="form-group">
+            <label for="id_password2">Password Confirmation</label>
+            {{ form.password2 }}
+            </div>
+        </div>
+
+        <!-- Logo en la esquina superior izquierda -->
+        <img src="{% static 'users/logo.png' %}" alt="Logo" style="position: absolute; top: 20px; left: 20px; height: 60px; border-radius: 30px;">
+
+        <button type="submit">Create Account</button>
+    </form>
+</div>
+</body>
+</html>
