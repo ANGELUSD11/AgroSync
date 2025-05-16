@@ -16,3 +16,8 @@ from django.shortcuts import render
 
 def error_404_view(request, exception):
     return render(request, '404.html', status=404)
+
+from django.shortcuts import render
+
+def mainpage(requets):
+    return render(requets, 'users/mainpage.html')

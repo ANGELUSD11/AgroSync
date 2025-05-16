@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'users/stylesmain.css' %}">
+    <title>AgroSync</title>
+
+</head>
+<body>
+     <div class="dashboard">
+    <div class="sidebar">
+      <img src="{% static 'users/logo.png' %}" alt="Logo" class="logo" style="position: absolute; top: 20px; left: 20px; height: 60px; border-radius: 30px;">
+ 
+    </div>
+     <button class="btn">Agregar Cultivo</button>
+      <button class="btn">Ver Cultivo</button>
+    <div class="content">
+      <div class="weather">
+        <h3>New York, NY</h3>
+        <p>68°</p>
+        <p>Mostly Cloudy</p>
+      </div>
+      <div class="warning">
+        <h4>Warning</h4>
+        <p>Strong raining</p>
+      </div>
+    </div>
+
+    
+</body>
+</html>
