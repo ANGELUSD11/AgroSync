@@ -40,8 +40,8 @@ def registrar_cultivo(request):
         form = CultivoForm(request.POST)
         if form.is_valid():
             form.save()  # Guarda el cultivo en la base de datos
-            return redirect('cultivos')  # Redirige a la lista de cultivos (suponiendo que tienes una vista para ello)
+            return redirect('registrar_cultivo')  # Redirige de vuelta al formulario de registro
     else:
         form = CultivoForm()
 
-    return render(request, 'registrar_cultivo.html', {'form': form})
+    return render(request, 'cultivos/registrar_cultivo.html', {'form': form})
