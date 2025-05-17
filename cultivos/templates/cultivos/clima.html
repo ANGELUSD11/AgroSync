@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Clima actual en {{ clima.ciudad }}</h2>
+
+    {% if clima.error %}
+    <p>{{ clima.error }}</p>
+    {% else %}
+    <ul>
+        <li>🌡️ Temperatura: {{ clima.temperatura }} °C</li>
+        <li>☁️ Estado: {{ clima.descripcion }}</li>
+        <li>💧 Humedad: {{ clima.humedad }}%</li>
+        <li>💨 Viento: {{ clima.viento }} m/s</li>
+    </ul>
+    {% endif %}
+</body>
+</html>

@@ -58,6 +58,16 @@
             <label for="id_password2">Password Confirmation</label>
             {{ form.password2 }}
             </div>
+            <div class="form-group full-width" style="margin-top: 10px;">
+                <small>
+                    La contraseña debe cumplir con los siguientes criterios:<br>
+                    - Al menos 8 caracteres<br>
+                    - No debe ser una contraseña común<br>
+                    - No puede ser completamente numérica<br>
+                    - No debe ser similar a su información personal<br>
+                    - Debe contener letras y números
+                </small>
+            </div>
         </div>
 
         <!-- Logo en la esquina superior izquierda -->
@@ -65,6 +75,9 @@
 
         <button type="submit">Create Account</button>
     </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'login' %}" class="btn-back-login return">Regresar al Login</a>
+    </div>
 </div>
 </body>
 </html>
