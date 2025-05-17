@@ -9,8 +9,7 @@ def clima_actual(request):
     lat = 4.7110
     lon = -74.0721
 
-    api_call = f"https://api.openweathermap.org/data/3.0/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
-
+    api_call = 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=4b6556d8c3f5006f717e2e9b74ec0edb'
     clima_data = {}
 
     try:
