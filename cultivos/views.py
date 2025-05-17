@@ -1,35 +1,36 @@
 from django.shortcuts import render
 import os
-import requests  # ✅ Importa requests
+import requests
 
 def clima_actual(request):
     ciudad = "Bogotá"
-    api_key = os.getenv("WEATHER_KEY")
-    lat = 33.44
-    lon = -94.04
-    api_call = f"https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=hourly,daily&appid={api_key}"
+    api_key = "4b6556d8c3f5006f717e2e9b74ec0edb"  # o puedes ponerla directo aquí para pruebas
+
+    lat = 4.7110
+    lon = -74.0721
+
+    api_call = f"https://api.openweathermap.org/data/3.0/weather?lat={lat}&lon={lon}&units=metric&appid={api_key}"
 
     clima_data = {}
 
     try:
-        respuesta = requests.get(api_call)  # ✅ Cambiado aquí
-        datos = respuesta.json()
-
+        respuesta = requests.get(api_call)
         if respuesta.status_code == 200:
-            current = datos['current']
+            datos = respuesta.json()
+
             clima_data = {
                 'ciudad': ciudad,
-                'temperatura': current['temp'],
-                'descripcion': current['weather'][0]['description'].capitalize(),
-                'humedad': current['humidity'],
-                'viento': current['wind_speed'],
-                'sensacion_termica': current['feels_like'],
-                'icono': current['weather'][0]['icon']
+                'temperatura': datos['main']['temp'],
+                'descripcion': datos['weather'][0]['description'].capitalize(),
+                'humedad': datos['main']['humidity'],
+                'viento': datos['wind']['speed'],
+                'sensacion_termica': datos['main']['feels_like'],
+                'icono': datos['weather'][0]['icon']
             }
         else:
-            clima_data['error'] = "Error al obtener los datos"
+            clima_data['error'] = f"Error al obtener los datos: {respuesta.status_code} - {respuesta.json().get('message')}"
 
     except Exception as e:
-        clima_data['error'] = f"Error al consumir la api: {e}"
+        clima_data['error'] = f"Error al consumir la API: {e}"
 
     return render(request, 'cultivos/clima.html', {'clima': clima_data})
