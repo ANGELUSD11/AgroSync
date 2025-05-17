@@ -1,0 +1,18 @@
+<!-- registrar_cultivo.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Cultivo</title>
+</head>
+<body>
+    <h1>Registrar Cultivo</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Esto renderiza el formulario como párrafos -->
+        <button type="submit">Registrar Cultivo</button>
+    </form>
+</body>
+</html>

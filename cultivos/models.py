@@ -34,3 +34,15 @@ class Cosecha(models.Model):
         verbose_name = "Cosecha"
         verbose_name_plural = "Cosechas"
         ordering = ['-fecha_recoleccion']
+
+class Cultivo(models.Model):
+
+    tipo = models.CharField(max_length=50)
+    fecha_siembra = models.DateField()
+    fecha_cosecha = models.DateField()
+    cantidad = models.IntegerField()  # Cantidad de plantas sembradas
+    descripcion = models.TextField()
+
+    def __str__(self):
+        return self.nombre
+        

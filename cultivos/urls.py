@@ -7,5 +7,6 @@ handler404 = 'users.views.error_404_view'
 
 
 urlpatterns = [
-    path('clima/', views.clima_actual, name='clima')
-]
+    path('clima/', views.clima_actual, name='clima'),
+    path('registrar-cultivo/', views.registrar_cultivo, name='registrar_cultivo'),
+    ]

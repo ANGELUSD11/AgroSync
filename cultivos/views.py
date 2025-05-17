@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import CultivoForm
 import os
 import requests
 
@@ -34,3 +35,14 @@ def clima_actual(request):
         clima_data['error'] = f"Error al consumir la API: {e}"
 
     return render(request, 'cultivos/clima.html', {'clima': clima_data})
+
+def registrar_cultivo(request):
+    if request.method == 'POST':
+        form = CultivoForm(request.POST)
+        if form.is_valid():
+            form.save()  # Guarda el cultivo en la base de datos
+            return redirect('cultivos')  # Redirige a la lista de cultivos (suponiendo que tienes una vista para ello)
+    else:
+        form = CultivoForm()
+
+    return render(request, 'registrar_cultivo.html', {'form': form})
