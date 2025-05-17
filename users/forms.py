@@ -23,3 +23,9 @@ class CustomUserCreationForm(UserCreationForm):
         if CustomUser.objects.filter(email=email).exists():
             raise forms.ValidationError("Este correo ya está registrado.")
         return email
+
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(label='Correo electrónico')
+    password = forms.CharField(widget=forms.PasswordInput, label='Contraseña')
