@@ -1,58 +1,115 @@
- {% load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="{% static 'users/stylesmain.css' %}">
-    <title>AgroSync</title>
+  <link rel="stylesheet" href="{% static 'users/stylesmain.css' %}" />
+  <title>AgroSync</title>
 
-    
+  <style>
+    .main-container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .left-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .chat-box {
+      width: 500px;
+      height: 100vh;
+      margin-left: 900px;
+      overflow: hidden;
+      border-left: 1px solid #ccc;
+    }
+
+    .chat-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+    }
+
+    .sidebar {
+      position: relative;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .dropdown.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="sidebar">
-        <img src="{% static 'users/logo.png' %}" alt="Logo" class="logo" style="position: absolute; top: 20px; left: 20px; height: 60px; border-radius: 30px;">
-      <button class="user-button" onclick="toggleDropdown()">Usuario</button>
-    <div id="userDropdown" class="dropdown">
-        <p><strong>Usuario:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Nombre Completo:</strong> {{ user.get_full_name }}</p>
-        <a href="{% url 'logout' %}">Cerrar sesión</a>
-    </div>
-    
-    </div>
+  <div class="main-container">
+    <!-- Contenido principal -->
+    <div class="left-content">
+      <div class="sidebar">
+        <img
+          src="{% static 'users/logo.png' %}"
+          alt="Logo"
+          class="logo"
+          style="position: absolute; top: 20px; left: 20px; height: 60px; border-radius: 30px;"
+        />
+        <button class="user-button" onclick="toggleDropdown()">Usuario</button>
+        <div id="userDropdown" class="dropdown">
+          <p><strong>Usuario:</strong> {{ user.username }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Nombre Completo:</strong> {{ user.get_full_name }}</p>
+          <a href="{% url 'logout' %}">Cerrar sesión</a>
+        </div>
+      </div>
 
-    <button class="btn-add">Agregar Cultivo</button>
-    <button class="btn-see">Ver Cultivo</button>
+      <button class="btn-add">Agregar Cultivo</button>
+      <button class="btn-see">Ver Cultivo</button>
 
-    <div class="weather">
+      <div class="weather">
         <h3>New York, NY</h3>
         <p>68°</p>
         <p>Mostly Cloudy</p>
-    </div>
-    <div class="warning">
+      </div>
+      <div class="warning">
         <h4>Warning</h4>
         <p>Strong raining</p>
+      </div>
     </div>
 
-    
+    <!-- Chatbot a la derecha -->
+    <div class="chat-box">
+      <iframe
+        src="https://berto-ai.onrender.com/"
+        allow="microphone; camera"
+      ></iframe>
+    </div>
+  </div>
 
-    <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById('userDropdown');
-            dropdown.classList.toggle('active');
-        }
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById('userDropdown');
+      dropdown.classList.toggle('active');
+    }
 
-        // Cerrar el menú al hacer clic fuera
-        window.onclick = function(event) {
-            const dropdown = document.getElementById('userDropdown');
-            if (!event.target.matches('.user-button')) {
-                dropdown.classList.remove('active');
-            }
-        }
-    </script>
-
+    window.onclick = function (event) {
+      const dropdown = document.getElementById('userDropdown');
+      if (!event.target.matches('.user-button')) {
+        dropdown.classList.remove('active');
+      }
+    };
+  </script>
 </body>
 </html>
