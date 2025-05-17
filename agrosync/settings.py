@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9wqhwkcy5t)r6==a@zlsno#_q5bfnhiegl+7qdyd4%iavs&+w%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*']  # Cambia esto para producción
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['*']  # Cambia esto para producción
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
