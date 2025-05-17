@@ -14,13 +14,13 @@
 <body>
     <div class="sidebar">
         <img src="{% static 'users/logo.png' %}" alt="Logo" class="logo" style="position: absolute; top: 20px; left: 20px; height: 60px; border-radius: 30px;">
-      <button class="user-button" onclick="toggleDropdown()">Usuario</button>
-    <div id="userDropdown" class="dropdown">
+      <button class="user-button" onclick="toggleDropdown()">  <img src="{% static 'users/logousuario.png' %}" alt="Usuario" width="25" height="25"> Usuario</button>
+      <div id="userDropdown" class="dropdown">
         <p><strong>Usuario:</strong> {{ user.username }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Nombre Completo:</strong> {{ user.get_full_name }}</p>
         <a href="{% url 'logout' %}">Cerrar sesión</a>
-    </div>
+     </div>
     
     </div>
 
