@@ -5,6 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Cultivo</title>
+    <style>
+        body {
+            background: #e8f5e9;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+        }
+        form {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.1);
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 30px 25px;
+        }
+        label {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 10px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #a5d6a7;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background: #f1f8e9;
+        }
+        button[type="submit"] {
+            background: #43a047;
+            color: #fff;
+            border: none;
+            padding: 10px 0;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: #388e3c;
+        }
+    </style>
 </head>
 <body>
     <h1>Registrar Cultivo</h1>
@@ -13,6 +59,17 @@
         {% csrf_token %}
         {{ form.as_p }}  <!-- Esto renderiza el formulario como párrafos -->
         <button type="submit">Registrar Cultivo</button>
+        {% if form.errors %}
+            <div style="color: red; margin-top: 10px;">
+                <p>Por favor, corrige los errores en el formulario.</p>
+            </div>
+        {% endif %}
+        {% if success_message %}
+            <div style="color: green; margin-top: 10px;">
+                <p>Registro Exitoso</p>
+            </div>
+        {% endif %}
+        <a href="{% url 'lista_cultivos' %}">Volver a la lista de cultivos</a>   
     </form>
 </body>
 </html>

@@ -1,16 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CultivoForm
+from .models import Cultivo
 import os
 import requests
 
 def clima_actual(request):
-    ciudad = "Bogotá"
+    ciudad = "Bogota"
     api_key = "4b6556d8c3f5006f717e2e9b74ec0edb"  # o puedes ponerla directo aquí para pruebas
 
     lat = 4.7110
     lon = -74.0721
 
-    api_call = 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=4b6556d8c3f5006f717e2e9b74ec0edb'
+    api_call = 'http://api.openweathermap.org/data/2.5/weather?q=Bogota,co&APPID=4b6556d8c3f5006f717e2e9b74ec0edb'
     clima_data = {}
 
     try:
@@ -20,7 +21,7 @@ def clima_actual(request):
 
             clima_data = {
                 'ciudad': ciudad,
-                'temperatura': datos['main']['temp'],
+                'temperatura': round(datos['main']['temp']-273.15),  # Convertir de Kelvin a Celsius
                 'descripcion': datos['weather'][0]['description'].capitalize(),
                 'humedad': datos['main']['humidity'],
                 'viento': datos['wind']['speed'],
@@ -45,3 +46,12 @@ def registrar_cultivo(request):
         form = CultivoForm()
 
     return render(request, 'cultivos/registrar_cultivo.html', {'form': form})
+
+def lista_cultivos(request):
+    cultivos = Cultivo.objects.all()
+    return render(request, 'cultivos/cultivos.html', {'cultivos': cultivos})
+
+def eliminar_cultivo(request, cultivo_id):
+    cultivo = get_object_or_404(Cultivo, id=cultivo_id)
+    cultivo.delete()
+    return redirect('lista_cultivos')

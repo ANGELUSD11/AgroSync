@@ -27,8 +27,10 @@
       <img src="{% static 'users/logo.png' %}" style="width: 50px; height: auto; border-radius: 15px;" alt="logo">
       <h1 style="font-size: 20px; color: white; font-family: 'Rubik Mono One', monospace;">AgroSync</h1>
       <button class="btn btn-success text-white me-2" style="background-color: rgb(54 192 70);"><i class="bi bi-person"></i>Usuario</button>
-      <button class="btn btn-success text-white me-2" style="background-color: rgb(54 192 70);"><i class="bi bi-flower2"></i>Agregar cultivos</button>
-      <button class="btn btn-success text-white" style="background-color: rgb(54 192 70);"><i class="bi bi-tree"></i>Ver cultivos</button>
+      <a href="../cultivos/registrar-cultivo" class="btn btn-success text-white me-2" style="background-color: rgb(54 192 70);">
+        <i class="bi bi-flower2"></i>Agregar cultivos
+      </a>
+      <a href="../cultivos/lista-cultivos" class="btn btn-success text-white" style="background-color: rgb(54 192 70);"><i class="bi bi-tree"></i>Ver cultivos</a>
     </div>
   </nav>
 
@@ -36,12 +38,17 @@
     <div class="row vh-100">
       <main class="col-12 col-md-8 p-4 overflow-auto">
         <div class="weather-card mb-4">
-          <h3><strong>New York, NY</strong></h3>
-          <p>68°</p>
-          <p>Mostly Cloudy</p>
-          <img src="{% static 'users/sol.png' %}" style="width: 100px; height: auto;">
-          <i class="bi bi-cloud"></i>
-        </div>
+  {% if clima.error %}
+    <div style="color:red;">{{ clima.error }}</div>
+  {% else %}
+    <h3><strong>{{ clima.ciudad }}</strong></h3>
+    <p style="font-size:2em;">{{ clima.temperatura }}°C</p>
+    <p>{{ clima.descripcion }}</p>
+    <img src="http://openweathermap.org/img/wn/{{ clima.icono }}@2x.png" style="width: 100px; height: auto;">
+    <p>Humedad: {{ clima.humedad }}%</p>
+    <p>Viento: {{ clima.viento }} m/s</p>
+  {% endif %}
+</div>
 
         <div class="warning" style="color: white;">
           <strong>Warning</strong>

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, LoginForm
 from django.contrib import messages
+import requests  # Asegúrate de importar requests
 
 def register(request):
     if request.method == 'POST':
@@ -41,5 +42,27 @@ def logout_view(request):
     return redirect('login')
 
 
-def mainpage(requets):
-    return render(requets, 'users/mainpage.html')
+def mainpage(request):
+    ciudad = "Tunja"
+    api_key = "4b6556d8c3f5006f717e2e9b74ec0edb"
+    api_call = f'http://api.openweathermap.org/data/2.5/weather?q={ciudad},co&APPID={api_key}'
+    clima_data = {}
+
+    try:
+        respuesta = requests.get(api_call)
+        if respuesta.status_code == 200:
+            datos = respuesta.json()
+            clima_data = {
+                'ciudad': ciudad,
+                'temperatura': round(datos['main']['temp']-273.15),
+                'descripcion': datos['weather'][0]['description'].capitalize(),
+                'humedad': datos['main']['humidity'],
+                'viento': datos['wind']['speed'],
+                'icono': datos['weather'][0]['icon']
+            }
+        else:
+            clima_data['error'] = f"Error al obtener los datos: {respuesta.status_code} - {respuesta.json().get('message')}"
+    except Exception as e:
+        clima_data['error'] = f"Error al consumir la API: {e}"
+
+    return render(request, 'users/mainpage.html', {'clima': clima_data})
